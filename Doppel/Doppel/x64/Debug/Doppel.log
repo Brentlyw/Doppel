@@ -1,0 +1,5 @@
+﻿  Doppel.cpp
+C:\Users\TRR\source\repos\Doppel\Doppel\obfusheader.h(218,1): warning C4244: 'return': conversion from 'double' to 'volatile int', possible loss of data
+C:\Users\TRR\source\repos\Doppel\Doppel\obfusheader.h(247,22): warning C4244: 'return': conversion from 'double' to 'volatile int', possible loss of data
+C:\Users\TRR\source\repos\Doppel\Doppel\Doppel.cpp(209,29): warning C4018: '<': signed/unsigned mismatch
+  Doppel.vcxproj -> C:\Users\TRR\source\repos\Doppel\x64\Debug\Doppel.exe
