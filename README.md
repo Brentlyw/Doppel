@@ -14,7 +14,7 @@ I made this program as a PoC (Proof of Concept) for a small competition. In no w
 
 # Important Features
 
-I wanted Döppel to be different, so I included some non-standard things within it’s execution flow. If you would like to know these things, the text below is hidden with a light foreground color, change it to black to read Döppel’s features. *Spoiler*
+I wanted Döppel to be different, so I included some non-standard things within it’s execution flow.
 
 - Runs 8 individual virtual machine checks, querying mouse info, hardware specs, and recent activity.
 - Is able to unhook ntdll.dll, and also patch ETW logging.
