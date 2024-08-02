@@ -25,5 +25,8 @@ I wanted Döppel to be different, so I included some non-standard things within 
 - Utilizes RC4 encrypted TCP connection to the stager server, to retrieve the main payload.
 - Main payload communicates using reverse-HTTPs to the C2 server.
 - Utilizes unique obfuscation patterns + packing to evade  RE, but probably not static analysis.
+- Makes use of the 'gargoyle' technique to evade in-memory scanning of executable memory.
+- Can he modified to inject any shellcode payload you'd like.
+- Is easily customizable.
 
 *If you like this, check out my UPXPatcher repo, which was made specifically for this PoC!*
